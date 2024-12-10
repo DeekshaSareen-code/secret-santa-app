@@ -1,0 +1,12 @@
+{
+  "name": "my-mean-app",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "backend": "node backend/src/index.js",
+    "frontend": "cd frontend && ng serve --hmr"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
