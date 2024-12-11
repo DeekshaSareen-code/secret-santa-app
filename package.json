@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "scripts": {
     "start": "concurrently \"npm run backend\" \"npm run frontend\"",
-    "backend": "node backend/src/index.js",
+    "backend": "cd backend && npm start",
     "frontend": "cd frontend && ng serve --hmr"
   },
   "devDependencies": {
-    "concurrently": "^9.1.0"
+    "concurrently": "^9.1.0",
+    "nodemon": "^3.1.7"
   }
 }
