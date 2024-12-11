@@ -14,7 +14,7 @@ export class AddNamesComponent implements OnInit {
   message: string = '';
   editingIndex: number | null = null;
   editingName: string = '';
-
+  confirmationUrl: string = '';
   constructor(private apiService: ApiService, private router: Router) {}
 
   ngOnInit(): void {
@@ -93,16 +93,17 @@ export class AddNamesComponent implements OnInit {
     }
 
     // Send the names to the backend to create the Secret Santa pairs
-    this.apiService.createSecretSantaPairs(this.names).subscribe(
-      (response) => {
-        console.log('Pairs created:', response);
-        // Navigate to a confirmation or result page (optional)
-        this.router.navigate(['/confirmation']);
+    this.apiService.createSecretSantaPairs(this.names).subscribe({
+      next: (response) => {
+        this.confirmationUrl = `http://localhost:4200/participant/${response.groupId}`;
       },
-      (error) => {
+      error: (error) => {
         console.error('Error creating pairs:', error);
         this.message = 'Failed to create pairs. Please try again!';
-      }
-    );
+      },
+      complete: () => {
+        this.message = '';
+      },
+    });
   }
 }

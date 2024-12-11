@@ -7,9 +7,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddNamesComponent } from './add-names/add-names.component';
 import { AppRoutingModule } from './app-routing.module';
 import { StartComponent } from './start/start.component';
+import { ViewParticipantComponent } from './view-participant/view-participant.component';
 
 @NgModule({
-  declarations: [AppComponent, AddNamesComponent, StartComponent],
+  declarations: [
+    AppComponent,
+    AddNamesComponent,
+    StartComponent,
+    ViewParticipantComponent,
+  ],
   imports: [
     HttpClientModule,
     BrowserModule,

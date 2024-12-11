@@ -53,4 +53,8 @@
       Confirm
     </button>
   </div>
+  <div *ngIf="confirmationUrl">
+    <h3>Share this URL with participants:</h3>
+    <a [href]="confirmationUrl">{{ confirmationUrl }}</a>
+  </div>
 </div>

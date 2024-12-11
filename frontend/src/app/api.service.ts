@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -20,5 +20,19 @@ export class ApiService {
 
   createSecretSantaPairs(names: string[]): Observable<any> {
     return this.http.post(`${this.apiUrl}/create-pairs`, { names });
+  }
+
+  getReceiver(
+    groupId: string,
+    firstName: string,
+    lastName: string
+  ): Observable<any> {
+    const params = new HttpParams()
+      .set('firstName', firstName)
+      .set('lastName', lastName);
+
+    return this.http.get<any>(`${this.apiUrl}/api/get-receiver/${groupId}`, {
+      params,
+    });
   }
 }

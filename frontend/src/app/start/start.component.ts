@@ -27,16 +27,14 @@ export class StartComponent {
   onContinue(): void {
     if (this.name.trim()) {
       // Call the API to add the name to the backend
-      this.apiService.addName(this.name).subscribe(
-        (response) => {
-          console.log('Name added successfully:', response);
+      this.apiService.addName(this.name).subscribe({
+        next: (response) => {
           this.router.navigate(['/add-names']);
         },
-        (error) => {
-          console.error('Error adding name:', error);
+        error: (error) => {
           this.message = 'Failed to add name. Please try again!';
-        }
-      );
+        },
+      });
     } else {
       this.message = 'Name is required!';
     }

@@ -3,18 +3,29 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-
+const mysql = require("mysql2");
+const { v4: uuidv4 } = require("uuid");
 // Middleware
 const app = express();
 app.use(bodyParser.json());
-
-// MongoDB Connection
 
 app.use(express.json());
 app.use(cors());
 
 let names = [];
 
+// Database connection
+const db = mysql.createConnection({
+  host: "localhost",
+  user: "root", // replace with your MySQL username
+  password: "", // replace with your MySQL password
+  database: "secret_santa",
+});
+
+db.connect((err) => {
+  if (err) throw err;
+  console.log("Connected to the database");
+});
 app.post("/add-name", (req, res) => {
   const { name } = req.body;
   if (names.some((n) => n.toLowerCase() === name.toLowerCase())) {
@@ -30,53 +41,57 @@ app.get("/get-names", (req, res) => {
 
 app.post("/create-pairs", (req, res) => {
   const { names } = req.body;
-  const pairs = createPairs(names);
-  res.json(pairs);
-});
-
-function createPairs(names, previousPairs = []) {
   // Ensure that there are at least 3 participants
   if (names.length < 3) {
-    throw new Error(
-      "There should be at least 3 members in the group to draw names."
-    );
+    throw new Error("At least 3 participants are required");
   }
-
   // Shuffle the names array randomly
-
   const shuffledNames = [...names].sort(() => Math.random() - 0.5);
 
   // Initialize the new pairs array
-  const newPairs = [];
 
-  // Create pairs while ensuring that no one is paired with the same person
-  for (let i = 0; i < shuffledNames.length; i++) {
-    const giver = shuffledNames[i];
-    let receiver;
+  const pairs = shuffledNames.map((name, index) => ({
+    giver: name,
+    receiver: shuffledNames[(index + 1) % names.length], // Circular pairing
+  }));
 
-    // Ensure that the receiver is not the same as the giver and doesn't repeat a previous pairing
-    for (let j = 0; j < shuffledNames.length; j++) {
-      receiver = shuffledNames[(i + j + 1) % shuffledNames.length];
+  const groupId = uuidv4();
+  pairs.forEach((pair) => {
+    db.query(
+      "INSERT INTO secret_santa_pairs (groupId, giver, receiver) VALUES (?, ?, ?)",
+      [groupId, pair.giver, pair.receiver],
+      (err, result) => {
+        if (err) {
+          console.error("Error saving pair:", err);
+          res.status(500).json({ message: "Failed to save pairs" });
+        }
+      }
+    );
+  });
+  res.status(200).json({ message: "Pairs created successfully", groupId });
+});
 
-      // Check if the current receiver has already been paired with the giver in the past
-      const pairExists = previousPairs.some(
-        (pair) =>
-          (pair.giver === giver && pair.receiver === receiver) ||
-          (pair.giver === receiver && pair.receiver === giver)
-      );
+app.get("/api/get-receiver/:groupId", (req, res) => {
+  const groupId = req.params.groupId;
+  const { firstName, lastName } = req.query;
+  const fullName = `${firstName} ${lastName}`;
 
-      // If no previous pair exists, break the loop
-      if (!pairExists) {
-        break;
+  db.query(
+    "SELECT receiver FROM secret_santa_pairs WHERE groupId = ? AND LOWER(giver) = LOWER(?)",
+    [groupId, firstName],
+    (err, result) => {
+      if (err) {
+        return res.status(500).json({ message: "Error fetching receiver" });
+      }
+
+      if (result.length > 0) {
+        res.status(200).json({ receiver: result[0].receiver });
+      } else {
+        res.status(404).json({ message: "No match found" });
       }
     }
-
-    // Create the new pair
-    newPairs.push({ giver, receiver });
-  }
-
-  return newPairs;
-}
+  );
+});
 
 app.listen(3000, () => {
   console.log("Backend running on port 3000");
