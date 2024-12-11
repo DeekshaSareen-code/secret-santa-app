@@ -21,7 +21,6 @@ A fun Secret Santa app built with the MEAN stack (MongoDB, Express, Angular, Nod
 - Express
 - Angular
 - Node.js
-- Nodemailer (for email notifications)
 - ChatGPT (for generating Christmas quotes)
 
 ## License:
