@@ -28,7 +28,7 @@ export class StartComponent {
     if (this.name.trim()) {
       // Call the API to add the name to the backend
       this.apiService.addName(this.name).subscribe({
-        next: (response) => {
+        next: () => {
           this.router.navigate(['/add-names']);
         },
         error: (error) => {
