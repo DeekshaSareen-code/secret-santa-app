@@ -1,23 +1,38 @@
-// frontend/src/app/api.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:3000'; // Backend API URL
+  private apiUrl = 'http://localhost:3000'; // Your backend API URL
 
   constructor(private http: HttpClient) {}
 
-  getHello(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/`, { responseType: 'text' }).pipe(
-      // Handle errors here
-      catchError((error) => {
-        console.error('Error:', error);
-        return throwError(() => 'Something went wrong!');
-      })
-    );
+  addName(name: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/add-name`, { name });
+  }
+
+  getNames(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiUrl}/get-names`);
+  }
+
+  createSecretSantaPairs(names: string[]): Observable<any> {
+    return this.http.post(`${this.apiUrl}/create-pairs`, { names });
+  }
+
+  getReceiver(
+    groupId: string,
+    firstName: string,
+    lastName: string
+  ): Observable<any> {
+    const params = new HttpParams()
+      .set('firstName', firstName)
+      .set('lastName', lastName);
+
+    return this.http.get<any>(`${this.apiUrl}/api/get-receiver/${groupId}`, {
+      params,
+    });
   }
 }

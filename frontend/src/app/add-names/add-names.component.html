@@ -1,0 +1,60 @@
+<div class="add-names-container">
+  <h2>Who do you want to draw names with?</h2>
+
+  <!-- Displaying current names list -->
+  <div *ngIf="names.length > 0">
+    <h3>Participants:</h3>
+    <ul>
+      <li *ngFor="let name of names; let i = index">
+        <div *ngIf="editingIndex !== i">
+          <span>{{ name }}</span>
+          <button class="edit-btn" (click)="editName(i)">Edit</button>
+          <button class="remove-btn" (click)="removeName(i)">Remove</button>
+        </div>
+
+        <!-- Editing mode for name -->
+        <div *ngIf="editingIndex === i">
+          <input
+            type="text"
+            [(ngModel)]="editingName"
+            [placeholder]="'Edit ' + name"
+          />
+          <button class="save-btn" (click)="saveEditedName()">Save</button>
+          <button class="cancel-btn" (click)="cancelEdit()">Cancel</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Adding new name -->
+  <div class="input-container">
+    <label for="new-name">Add a Name:</label>
+    <input
+      type="text"
+      id="new-name"
+      [(ngModel)]="newName"
+      placeholder="Enter name"
+    />
+    <button class="add-btn" (click)="addName()">+</button>
+  </div>
+
+  <!-- Error Message if validation fails -->
+  <div *ngIf="message" class="error-message">
+    {{ message }}
+  </div>
+
+  <!-- Confirm Names Button -->
+  <div class="confirm-button">
+    <button
+      class="confirm-btn"
+      [disabled]="names.length < 3"
+      (click)="confirmNames()"
+    >
+      Confirm
+    </button>
+  </div>
+  <div *ngIf="confirmationUrl">
+    <h3>Share this URL with participants:</h3>
+    <a [href]="confirmationUrl">{{ confirmationUrl }}</a>
+  </div>
+</div>
