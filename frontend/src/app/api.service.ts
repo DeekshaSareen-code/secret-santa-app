@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:3000'; // Your backend API URL
+  private apiUrl = 'http://localhost:3000/secret-santa'; // Your backend API URL
 
   constructor(private http: HttpClient) {}
 
@@ -19,6 +19,7 @@ export class ApiService {
   }
 
   createSecretSantaPairs(names: string[]): Observable<any> {
+    console.log('Creating pairs for:', names);
     return this.http.post(`${this.apiUrl}/create-pairs`, { names });
   }
 
@@ -31,7 +32,7 @@ export class ApiService {
       .set('firstName', firstName)
       .set('lastName', lastName);
 
-    return this.http.get<any>(`${this.apiUrl}/api/get-receiver/${groupId}`, {
+    return this.http.get<any>(`${this.apiUrl}/get-receiver/${groupId}`, {
       params,
     });
   }

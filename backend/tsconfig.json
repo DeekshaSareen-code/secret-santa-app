@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node", // Ensure this is set to "node"
+    "target": "ES6", // Ensure your target is ES6 or higher
+    "experimentalDecorators": true, // Ensure this is set to true
+    "emitDecoratorMetadata": true, // Ensure this is set to true
+    "baseUrl": "./", // This helps resolve modules from the root
+    "paths": {
+      "@nestjs/*": ["node_modules/@nestjs/*"],
+      "src/*": ["./src/*"]
+    }
+  }
+}
