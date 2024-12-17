@@ -1,86 +1,108 @@
-/* Main container for the app */
+$pastel-red: #ff8c8c; // Soft red for accents
+$pastel-green: #b8e0d2; // Light green for background
+$pastel-yellow: #f7e7b2; // Soft yellow for highlights
+$pastel-blue: #a7c8d9; // Light blue for text
+$background-color: rgba(255, 255, 255, 0.85); // Light transparent background
+
+$button-bg: #ffb6b6; // Light red background for button
+$button-hover-bg: #f08080; // Slightly darker red for button hover
+$button-text-color: #2f2f2f; // Dark text color for button
+$button-border-radius: 12px; // Rounded button corners
+
+// Global font settings
+$font-family: "Pacifico", cursive, sans-serif; // Cursive font for header and button
+
+// App container centered using Flexbox
 .app-container {
-  background-color: #fff; /* Clean background for the form */
-  padding: 40px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-image: url("https://pixabay.com/get/g060e83c750276ecfbca2c3b57340e8abcddcd7c33a5a9b5affb8b46cf866f63f2485fd5797bbfcd9e51e3485b0ccd6a557d919931fff39b1161484ba67d7f989e0a598a1102e9ba09456014132b039a7_1280.jpg");
+  background-size: cover; // Make sure the background covers the entire container
+  background-position: center; // Center the background image
+  background-repeat: no-repeat; // Prevent the image from repeating
+  //background-blend-mode: color;
+  padding: 3rem;
   width: 100%;
-  max-width: 500px;
-  margin: 50px auto;
-  text-align: center;
-  font-family: "Arial", sans-serif;
+  max-width: 400px; // Slightly wider container for better design on small screens
+  box-shadow: 0 4px 12px rgba(19, 123, 235, 0.864);
+  border-radius: 12px; // Rounded corners for a soft look
+  text-align: center; // Center the text inside the container
+  position: relative; // To position other elements inside this container
+  min-height: 500px; // Minimum height for better mobile view
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  // Add a subtle border for the container
+  border: 2px solid #f0f0f0;
+  background-color: rgba(255, 255, 255, 0.85);
 }
 
+// Header styling with cursive font
 h2 {
-  font-size: 2rem;
-  color: #b30000; /* Christmas Red */
-  margin-bottom: 20px;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 1.5rem;
+  font-family: $font-family;
+  text-shadow: 1px 1px 2px rgba(9, 2, 202, 0.1); // Slight shadow for better readability
 }
 
+// Label styling
+label {
+  font-size: 1.2rem;
+  color: $pastel-green;
+  margin-bottom: 0.5rem;
+}
+
+// Input field styling with smooth borders and pastel colors
+input {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-family: "Comic Sans", sans-serif; // Simple font for input
+  box-sizing: border-box;
+  background-color: #f7f7f7; // Light gray background for input box
+  transition: border 0.3s ease-in-out;
+
+  &:focus {
+    border-color: $pastel-red; // Change border color when focused
+    outline: none;
+  }
+}
+
+// Button styling with hover effect
+button {
+  padding: 0.8rem 2.2rem;
+  border: none;
+  background-color: $button-bg;
+  color: $button-text-color;
+  font-size: 1.2rem;
+  font-family: $font-family;
+  border-radius: $button-border-radius;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  // Hover effect to change the color
+  &:hover {
+    background-color: $button-hover-bg;
+    transform: scale(1.05); // Slight scale effect on hover
+  }
+}
+
+// Message text styling
+.message {
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  color: red;
+  font-style: italic;
+}
+
+// Additional decorative effects (optional)
 .form-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-label {
-  font-size: 1.2rem;
-  color: #3c9e5e; /* Christmas Green */
-  margin-bottom: 10px;
-}
-
-input {
-  padding: 10px;
-  font-size: 1rem;
-  width: 80%;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  outline: none;
-  margin-bottom: 20px;
-}
-
-input:focus {
-  border-color: #3c9e5e; /* Green focus border */
-  box-shadow: 0 0 5px rgba(0, 158, 78, 0.5);
-}
-
-button {
-  background-color: #3c9e5e; /* Christmas Green */
-  color: white;
-  padding: 12px 25px;
-  font-size: 1.2rem;
-  border-radius: 8px;
-  width: 80%;
-  transition: background-color 0.3s ease;
-  cursor: pointer;
-  border: none;
-}
-
-button:hover {
-  background-color: #318f53; /* Darker Green */
-}
-
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-/* Message styles */
-.message {
-  color: #d9534f; /* Red for error message */
-  font-size: 1.1rem;
-  font-weight: bold;
-  margin-top: 20px;
-}
-
-/* Responsive design */
-@media (max-width: 600px) {
-  .app-container {
-    padding: 25px;
-  }
-
-  input,
-  button {
-    width: 100%; /* Full-width inputs and buttons on smaller screens */
-  }
 }
