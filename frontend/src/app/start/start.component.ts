@@ -33,10 +33,16 @@ export class StartComponent {
         },
         error: (error) => {
           this.message = 'Failed to add name. Please try again!';
+          setTimeout(() => {
+            this.message = '';
+          }, 3000);
         },
       });
     } else {
       this.message = 'Name is required!';
+      setTimeout(() => {
+        this.message = '';
+      }, 3000);
     }
   }
 }
