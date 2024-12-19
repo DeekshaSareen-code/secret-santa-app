@@ -2,22 +2,24 @@
   <h2>Who do you want to draw names with?</h2>
 
   <!-- Displaying current names list -->
-  <div *ngIf="names.length > 0">
+  <div *ngIf="names.length > 0" class="participants-container">
     <h3>Participants:</h3>
     <ul>
       <li *ngFor="let name of names; let i = index">
-        <div *ngIf="editingIndex !== i">
+        <div *ngIf="editingIndex !== i" class="list-item">
           <span>{{ name }}</span>
-          <button class="edit-btn" (click)="editName(i)">Edit</button>
-          <button class="remove-btn" (click)="removeName(i)">Remove</button>
+          <div class="button-container">
+            <button class="edit-btn" (click)="editName(i)">Edit</button>
+            <button class="remove-btn" (click)="removeName(i)">Remove</button>
+          </div>
         </div>
 
         <!-- Editing mode for name -->
-        <div *ngIf="editingIndex === i">
+        <div *ngIf="editingIndex === i" class="list-item">
           <input
             type="text"
             [(ngModel)]="editingName"
-            [placeholder]="'Edit ' + name"
+            [placeholder]="'Edit' + name"
           />
           <button class="save-btn" (click)="saveEditedName()">Save</button>
           <button class="cancel-btn" (click)="cancelEdit()">Cancel</button>
@@ -28,7 +30,6 @@
 
   <!-- Adding new name -->
   <div class="input-container">
-    <label for="new-name">Add a Name:</label>
     <input
       type="text"
       id="new-name"

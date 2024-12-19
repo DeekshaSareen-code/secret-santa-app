@@ -1,39 +1,148 @@
+$pastel-red: #ff8c8c; // Soft red for accents
+$pastel-green: #b8e0d2; // Light green for background
+$pastel-yellow: #f7e7b2; // Soft yellow for highlights
+$pastel-blue: #a7c8d9; // Light blue for text
+$background-color: rgba(255, 255, 255, 0.85); // Light transparent background
+
+$button-bg: #ffb6b6; // Light red background for button
+$button-hover-bg: #f08080; // Slightly darker red for button hover
+$button-text-color: #2f2f2f; // Dark text color for button
+$button-border-radius: 12px; // Rounded button corners
+
+// Global font settings
+$font-family: "Pacifico", cursive, sans-serif; // Cursive font for header and button
+
 /* Container for Add Names */
 .add-names-container {
-  padding: 30px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-image: url("/assets/images/snow.jpg");
+  background-size: cover; // Make sure the background covers the entire container
+  background-position: center; // Center the background image
+  background-repeat: no-repeat; // Prevent the image from repeating
+  padding: 2rem 3rem 2rem; //
   width: 100%;
-  max-width: 500px;
-  margin: auto;
-  text-align: center;
+  max-width: 420px; // Slightly wider container for better design on small screens
+  box-shadow: 0 4px 12px rgba(19, 123, 235, 0.864);
+  border-radius: 12px; // Rounded corners for a soft look
+  text-align: center; // Center the text inside the container
+  position: relative; // To position other elements inside this container
+  min-height: 500px; // Minimum height for better mobile view
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #f0f0f0;
 }
 
 h2 {
-  color: #b30000; /* Christmas Red */
+  font: 1em "Helvetica Neue";
+  font-family: fantasy;
   font-size: 2rem;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 1.5rem;
+  color: #ae4e4e;
+  text-shadow: 1px 1px 2px rgba(9, 2, 202, 0.1); // Slight shadow for better readability
 }
 
 h3 {
-  color: #3c9e5e; /* Christmas Green */
+  color: #3c9e5e;
   margin-top: 20px;
+  position: sticky;
 }
 
-ul {
+.participants-container {
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding-top: 50px; /* Space to accommodate the sticky header */
+  max-height: 300px; /* Set max height for scrollable content */
+  overflow-y: auto; /* Enable vertical scrolling when content overflows */
+  padding: 1rem;
+  border-radius: 5px;
+}
+.participants-container::-webkit-scrollbar {
+  width: 8px; /* Width of scrollbar */
+}
+.participants-container::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+}
+.participants-container::-webkit-scrollbar-track {
+  background: #f9f9f9; /* Light track */
+}
+
+.participants-container ul {
   list-style: none;
   padding: 0;
-  text-align: left;
+  margin: 0;
+  width: 100%;
+}
+.list-item {
+  display: flex; /* Flexbox layout */
+  align-items: center; /* Align vertically in the center */
+  justify-content: space-between; /* Space between text and buttons */
+  width: 100%; /* Full width of the parent container */
+  padding: 8px;
+  background-color: #f9f9f9;
+  box-sizing: border-box; /* Include padding in width/height */
+  font-family: "Georgia", serif; /* Ensure no Arial font */
 }
 
-li {
+/* Name spans take the available space on the left */
+.list-item span {
+  flex-grow: 1; /* Takes remaining space */
+  word-wrap: break-word; /* Ensure long text wraps */
+  text-align: left;
+}
+.list-item:hover {
+  background-color: #e6ffe6;
+}
+
+.participants-container li {
   background-color: #f9f9f9;
-  padding: 10px;
+  padding: 4px;
   margin-bottom: 10px;
   border-radius: 5px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  align-items: center; /* Align items vertically */
+  justify-content: space-between; /* Ensure space between text and buttons */
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 1rem;
+  font-family: "Georgia", serif; /* Use a legible font */
+  color: #000; /* Black text */
+}
+
+.participants-container li span {
+  flex-grow: 1; /* Take up remaining space */
+  text-align: left;
+  word-wrap: break-word;
+  font-weight: bold;
+}
+/* Buttons */
+.edit-btn,
+.remove-btn {
+  background-color: white; /* Neutral button background */
+  border: 1px solid transparent;
+  font-size: 0.9rem;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Align buttons to the right */
+.button-container {
+  display: flex; /* Flexbox for the buttons */
+  gap: 10px; /* Space between buttons */
+}
+/* Buttons: Styling and hover effects */
+button {
+  font-size: 0.9rem;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 button {
@@ -56,13 +165,36 @@ button:disabled {
 
 /* Specific buttons */
 .edit-btn {
-  background-color: #f0ad4e; /* Yellow */
-  color: white;
+  background-color: white; /* Yellow */
+  color: #f0ad4e;
+  border: 1px solid transparent; /* Transparent border by default */
+  font-size: 0.9rem;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.edit-btn:hover {
+  outline: none;
+  border-color: #f0ad4e; /* Focus on green border */
+  box-shadow: 0 0 5px rgba(216, 94, 12, 0.848);
+  align-items: right;
 }
 
 .remove-btn {
-  background-color: #d9534f; /* Red */
-  color: white;
+  background-color: white; /* Red */
+  color: #d9534f;
+  border: 1px solid transparent; /* Transparent border by default */
+  font-size: 0.9rem;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.remove-btn:hover {
+  outline: none;
+  border-color: #b30000; /* Focus on green border */
+  box-shadow: 0 0 5px rgba(158, 0, 0, 0.848);
 }
 
 .save-btn {
@@ -82,17 +214,21 @@ button:disabled {
 }
 
 .confirm-btn {
-  background-color: #b30000; /* Confirm Red */
-  color: white;
-  padding: 12px 25px;
+  padding: 0.6rem 1.9rem;
+  border: none;
+  background-color: $button-bg;
+  color: $button-text-color;
   font-size: 1.2rem;
-  border-radius: 8px;
-  width: 100%;
-  transition: background-color 0.3s ease;
-}
+  font-family: $font-family;
+  border-radius: $button-border-radius;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 
-.confirm-btn:hover {
-  background-color: #ff3333; /* Lighter Red */
+  // Hover effect to change the color
+  &:hover {
+    background-color: $button-hover-bg;
+    transform: scale(1.05); // Slight scale effect on hover
+  }
 }
 
 /* Error Message */
@@ -104,16 +240,36 @@ button:disabled {
 }
 
 input {
-  padding: 10px;
+  padding: 10px 20px;
+  margin: 1rem;
+  gap: 10px;
   font-size: 1rem;
+  font-family: Georgia, "Times New Roman", Times, serif;
   border: 1px solid #ccc;
   border-radius: 4px;
   outline: none;
   width: 80%;
-  margin: 10px 0;
+  margin: 10px 5px;
 }
 
-input:focus {
+.input-container {
+  align-items: center; /* Align items vertically */
+  gap: 10px; /* Space between the input and button */
+  width: 100%; /* Optional: Make the container as wide as needed */
+}
+
+/* Make sure the input takes most of the width, and the button is appropriately sized */
+.input-container input {
+  flex: 2; /* Input takes the remaining space */
+  max-width: 70%; /* Set a maximum width for the input field */
+}
+
+.input-container .add-btn {
+  flex-shrink: 0; /* Prevent the button from shrinking */
+  padding: 10px 20px; /* Ensure proper button padding */
+}
+
+input:hover {
   border-color: #3c9e5e; /* Focus on green border */
   box-shadow: 0 0 5px rgba(0, 158, 78, 0.5);
 }
@@ -122,6 +278,9 @@ input:focus {
 @media (max-width: 600px) {
   .add-names-container {
     padding: 20px;
+  }
+  .participants-container {
+    max-height: 200px; /* Reduce scrollable height on small screens */
   }
 
   .add-btn,
