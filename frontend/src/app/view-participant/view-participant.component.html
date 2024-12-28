@@ -1,11 +1,21 @@
 <div class="view-participant-container">
   <h2>Enter Your Details</h2>
-  <input
-    [(ngModel)]="firstName"
-    placeholder="Enter your First Name"
-    required=""
-  />
-  <input [(ngModel)]="lastName" placeholder="Enter your Last Name" />
+  <div class="input-container">
+    <label for="first-name">First Name:</label>
+    <input
+      [(ngModel)]="firstName"
+      placeholder="Enter your First Name"
+      required=""
+      id="first-name"
+    />
+    <label for="last-name">Last Name:</label>
+    <input
+      id="last-name"
+      [(ngModel)]="lastName"
+      placeholder="Enter your Last Name"
+    />
+  </div>
+
   <button (click)="findReceiver()">Find Your Secret Santa</button>
 
   <p *ngIf="receiverName">
