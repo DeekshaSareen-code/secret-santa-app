@@ -1,0 +1,87 @@
+$pastel-red: #ff8c8c; // Soft red for accents
+$pastel-green: #b8e0d2; // Light green for background
+$pastel-yellow: #f7e7b2; // Soft yellow for highlights
+$pastel-blue: #a7c8d9; // Light blue for text
+$background-color: rgba(255, 255, 255, 0.85); // Light transparent background
+
+$button-bg: #ffb6b6; // Light red background for button
+$button-hover-bg: #f08080; // Slightly darker red for button hover
+$button-text-color: #2f2f2f; // Dark text color for button
+$button-border-radius: 12px; // Rounded button corners
+
+// Global font settings
+$font-family: "Pacifico", cursive, sans-serif; // Cursive font for header and button
+
+// App container centered using Flexbox
+.view-participant-container {
+  background-image: url("/assets/images/snow.jpg");
+  background-size: cover; // Make sure the background covers the entire container
+  background-position: center; // Center the background image
+  background-repeat: no-repeat; // Prevent the image from repeating
+  //background-blend-mode: color;
+  padding: 3rem;
+  width: 100%;
+  max-width: 400px; // Slightly wider container for better design on small screens
+  box-shadow: 0 4px 12px rgba(19, 123, 235, 0.864);
+  border-radius: 12px; // Rounded corners for a soft look
+  position: relative; // To position other elements inside this container
+  min-height: 500px; // Minimum height for better mobile view
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  // Add a subtle border for the container
+  border: 2px solid #f0f0f0;
+  background-color: rgba(255, 255, 255, 0.85);
+}
+.view-participant-container label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: $button-text-color;
+  text-align: justify;
+  display: block;
+  margin: 0.5rem 0rem 0.1rem;
+}
+.input-container {
+  gap: 10px;
+  width: auto;
+  padding: 2rem;
+  align-items: center;
+  max-width: 300px;
+  display: block;
+  width: 100%;
+}
+
+input {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  width: 100%;
+}
+
+button {
+  padding: 0.6rem 1.9rem;
+  border: none;
+  background-color: $button-bg;
+  color: $button-text-color;
+  font-size: 1.2rem;
+  font-family: $font-family;
+  border-radius: $button-border-radius;
+  cursor: pointer;
+  margin: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  // Hover effect to change the color
+  &:hover {
+    background-color: $button-hover-bg;
+    transform: scale(1.05); // Slight scale effect on hover
+  }
+}
+
+button:hover {
+  opacity: 0.8;
+}
